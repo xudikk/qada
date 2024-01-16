@@ -1,0 +1,186 @@
+<! --
+Created by Xudoyberdi Egamberdiyev
+
+Please contact before making any changes
+
+Tashkent, Uzbekistan
+-->
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+  <div class="card-header d-flex justify-content-between">
+     <div class="header-title">
+        <h4 class="card-title">Bootstrap Datatables</h4>
+     </div>
+  </div>
+  <div class="card-body">
+     <div class="table-responsive">
+        <table  class="table table-striped table-bordered bg-light">
+            <thead>
+              <tr>
+                 <th>Sana</th>
+                 <th>Bomdod</th>
+                 <th>Peshin</th>
+                 <th>Asr</th>
+                 <th>Shom</th>
+                 <th>Xufton</th>
+                 <th>Vitr Vojib</th>
+              </tr>
+           </thead>
+            <tbody>
+
+            <tr>
+                 <td><b>{{ today.date }}</b></td>
+                 <td class={{ today.bomdod }}> <!-- Bomdod  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ today.peshin }}> <!-- Peshin  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ today.asr }}> <!-- Asr  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ today.shom }}> <!-- Shom  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ today.xufton }}> <!-- Xufton  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ today.vitr }}> <!-- Vitr Vojib  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+
+              </tr>
+            </tbody>
+
+        </table>
+         <br>
+         <hr>
+         <br>
+
+        <table class="table table-striped table-bordered">
+           <thead>
+              <tr>
+                 <th>Sana</th>
+                 <th>Bomdod</th>
+                 <th>Peshin</th>
+                 <th>Asr</th>
+                 <th>Shom</th>
+                 <th>Xufton</th>
+                 <th>Vitr Vojib</th>
+              </tr>
+           </thead>
+           <tbody>
+                {% for i in all %}
+               <tr {% if today == i %} class="bg-info"{% endif %}>
+                 <td><b>{{ i.date }}</b></td>
+                 <td class={{ i.bomdod }}> <!-- Bomdod  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ i.peshin }}> <!-- Peshin  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ i.asr }}> <!-- Asr  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ i.shom }}> <!-- Shom  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ i.xufton }}> <!-- Xufton  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+                 <td class={{ i.vitr }}> <!-- Vitr Vojib  -->
+                    <a class="btn rounded-pill btn-success" title="Vaqtida o'qidim"><i class="fa-solid fa-thumbs-up"></i></a>
+                    <a class="btn rounded-pill btn-warning" title="Qazosi o'qidim"><i class="fa-solid fa-handshake"></i></a>
+                    <a class="btn rounded-pill btn-danger" title="Qazosi Qilganman"><i class="fa-solid fa-thumbs-down"></i></a>
+                 </td>
+
+              </tr>
+                {% endfor %}
+
+           </tbody>
+           <tfoot>
+              <tr>
+                 <th>Sana</th>
+                 <th>Bomdod</th>
+                 <th>Peshin</th>
+                 <th>Asr</th>
+                 <th>Shom</th>
+                 <th>Xufton</th>
+                 <th>Vitr Vojib</th>
+              </tr>
+           </tfoot>
+        </table>
+     </div>
+  </div>
+</div>
+
+
+
+  <script>
+      // Get all 'td' elements with the class 'bg-danger'
+    var tdElements = document.querySelectorAll('td.bg-danger');
+
+    // Loop through each 'td' element
+    tdElements.forEach(function(td) {
+        // Get all 'a' elements with the class 'btn danger' within the current 'td' element
+        var aElements = td.querySelectorAll('a.btn-danger');
+
+        // Loop through each 'a' element and remove it
+        aElements.forEach(function(a) {
+            a.remove();
+        });
+    });
+
+    // Get all 'td' elements with the class 'bg-danger'
+    var tdElements = document.querySelectorAll('td.bg-warning');
+
+    tdElements.forEach(function(td) {
+        var aElements = td.querySelectorAll('a.btn-warning');
+
+        aElements.forEach(function(a) {
+            a.remove();
+        });
+    });
+
+    // Get all 'td' elements with the class 'bg-danger'
+    var tdElements = document.querySelectorAll('td.bg-success');
+
+    tdElements.forEach(function(td) {
+        var aElements = td.querySelectorAll('a.btn-success');
+
+        aElements.forEach(function(a) {
+            a.remove();
+        });
+    });
+
+  </script>
+
+
+{% endblock %}
+
+
