@@ -6,10 +6,12 @@
 from django.urls import path
 
 from core.auth import sign_in, sign_out
-from core.views import index
+from core.views import index, grader
 
 urlpatterns = [
     path('', index, name='home'),
+
+    path('g-<int:pk>/<status>/nomoz-<type>', grader, name='gr'),
 
 
     # auth

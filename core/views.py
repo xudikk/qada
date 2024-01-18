@@ -1,7 +1,9 @@
+from contextlib import closing
 from datetime import datetime, timedelta
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.db import connection
+from django.shortcuts import render, redirect
 from core.models import Qada
 # Create your views here.
 
@@ -45,5 +47,20 @@ def index(request):
 
 
 @login_required(login_url='login')
-def grader(request):
-    pass
+def grader(request, pk, status, type):
+    qada = Qada.objects.filter(id=pk).first()
+    if not qada:
+        return redirect('home')
+    if status not in ['bg-warning', 'bg-success', 'bg-danger']:
+        return redirect('home')
+    sql = f"""
+    update core_qada
+    set {type} = "{status}"
+    where id={pk}
+    """
+    with closing(connection.cursor()) as cursor:
+        cursor.execute(sql)
+
+    return redirect('home')
+
+
