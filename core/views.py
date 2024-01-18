@@ -35,11 +35,9 @@ def calculator():
 def index(request):
     current_date = datetime.now().date()
     today = Qada.objects.get_or_create(user=request.user, date=current_date)[0]
-    all = Qada.objects.all().order_by('-date')
 
     ctx = {
         "today": today,
-        "all": all
     }
     ctx.update(calculator())
 
