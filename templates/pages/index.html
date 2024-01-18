@@ -12,10 +12,15 @@ Tashkent, Uzbekistan
 <div class="card">
   <div class="card-header d-flex justify-content-between">
      <div class="header-title">
-        <h4 class="card-title">Bootstrap Datatables</h4>
+        <h4 class="card-title">Qazo nomozlari jadvali</h4>
      </div>
   </div>
   <div class="card-body">
+      <div class="card-header d-flex justify-content-between">
+         <div class="header-title">
+            <h4 class="card-title">Today</h4>
+         </div>
+      </div>
      <div class="table-responsive">
         <table  class="table table-striped table-bordered bg-light">
             <thead>
@@ -68,9 +73,12 @@ Tashkent, Uzbekistan
             </tbody>
 
         </table>
-         <br>
          <hr>
-         <br>
+         <div class="card-header d-flex justify-content-between">
+             <div class="header-title">
+                <h4 class="card-title">Oy bo'yicha</h4>
+             </div>
+          </div>
 
         <table class="table table-striped table-bordered">
            <thead>
@@ -85,7 +93,7 @@ Tashkent, Uzbekistan
               </tr>
            </thead>
            <tbody>
-                {% for i in all %}
+                {% for i in to_now %}
                <tr {% if today == i %} class="bg-info"{% endif %}>
                  <td><b>{{ i.date }}</b></td>
                  <td class={{ i.bomdod }}> <!-- Bomdod  -->
