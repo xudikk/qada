@@ -5,6 +5,8 @@
 #  Tashkent, Uzbekistan
 
 from datetime import timedelta
+
+from django.conf import settings
 from django.utils import timezone
 from core.models import Qada  # Qazo Nomozlari Models
 
@@ -34,6 +36,8 @@ def main(request):
                 Qada.objects.create(date=current_date, user=request.user)  # replace with your actual create method
             # Go to the next date
             current_date += timedelta(days=1)
-    return {}
+    return {
+        "app_name": settings.APP_NAME
+    }
 
 

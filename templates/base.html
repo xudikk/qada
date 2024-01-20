@@ -13,7 +13,7 @@ Tashkent, Uzbekistan
 
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>Datum | CRM Admin Dashboard Template</title>
+      <title>{{ app_name }}</title>
 
       <!-- Favicon -->
       <link rel="shortcut icon" href="{% static 'assets/images/favicon.ico' %}" />
@@ -36,7 +36,7 @@ Tashkent, Uzbekistan
                <a href="../backend/index.html" class="header-logo">
                   <img src="{% static 'assets/images/logo.png' %}" class="img-fluid rounded-normal light-logo" alt="logo">
                   <img src="{% static 'assets/images/logo-dark.png' %}" class="img-fluid rounded-normal d-none sidebar-light-img" alt="logo">
-                  <span>Datum</span>
+                  <span>{{ app_name }}</span>
               </a>
               <div class="side-menu-bt-sidebar-1">
                   <svg xmlns="http://www.w3.org/2000/svg" class="text-light wrapper-menu" width="30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -48,28 +48,48 @@ Tashkent, Uzbekistan
               <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="side-menu">
                       <li class="active sidebar-layout">
-                          <a href="" class="svg-icon">
+                          <a href="{% url 'home' %}" class="svg-icon">
                               <i class="">
                                   <svg width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                   </svg>
                               </i>
-                              <span class="ml-2">Dashboard</span>
+                              <span class="ml-2">Asosiy Sahifa</span>
                               <p class="mb-0 w-10 badge badge-pill badge-primary">6</p>
                           </a>
                       </li>
                       <li class="px-3 pt-3 pb-2">
                           <span class="text-uppercase small font-weight-bold">Pages</span>
                       </li>
+<!--                      <li class="sidebar-layout">-->
+<!--                          <a href="" class="svg-icon">-->
+<!--                              <i class="">-->
+<!--                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />-->
+<!--                                  </svg>-->
+<!--                              </i><span class="ml-2">Qoidalar</span>-->
+<!--                          </a>-->
+<!--                      </li>-->
                       <li class="sidebar-layout">
-                          <a href="" class="svg-icon">
-                              <i class="">
+                          <a href="#app6" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
+                              <i>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                   </svg>
-                              </i><span class="ml-2">Blank Page</span>
+                              </i>
+                              <span class="ml-2">Qoidalar</span>
                           </a>
                       </li>
+
+                       <li class="sidebar-layout">
+                           <a href="#app6" class="collapsed svg-icon" data-toggle="modal" data-target="#logoutModal" aria-expanded="false">
+                               <i>
+                                    <svg class="svg-icon mr-0 text-secondary" id="h-05-p" width="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                                    </svg>
+                               </i>
+                          <span class="ml-2">Logout</span>
+                    </li>
                   </ul>
               </nav>
               <div class="pt-5 pb-5"></div>
@@ -189,12 +209,6 @@ Tashkent, Uzbekistan
                                           </svg>
                                           <a href="../app/user-privacy-setting.html">Privacy Settings</a>
                                       </li>
-                                      <li class="dropdown-item  d-flex svg-icon border-top">
-                                          <svg class="svg-icon mr-0 text-secondary" id="h-05-p" width="20" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                                          </svg>
-                                          <a href="../backend/auth-sign-in.html">Logout</a>
-                                      </li>
                                   </ul>
                               </li>
                           </ul>
@@ -219,20 +233,61 @@ Tashkent, Uzbekistan
             <div class="row">
                 <div class="col-lg-6">
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="../backend/privacy-policy.html">Privacy Policy</a></li>
-                        <li class="list-inline-item"><a href="../backend/terms-of-service.html">Terms of Use</a></li>
+                        <li class="list-inline-item"><a href="">Privacy Policy</a></li>
+                        <li class="list-inline-item"><a href="">Terms of Use</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 text-right">
-                    <span class="mr-1">
-                        Copyright
-                        <script>document.write(new Date().getFullYear())</script>© <a href="#" class="">Datum</a>
-                        All Rights Reserved.
-                    </span>
+                     <strong>Dashboard created by <a href="https://t.me/xudikk">xudikk</a>.</strong>
+                    <div class="float-right d-none d-sm-inline-block">
+                        <b>Version</b> 1.0
+                    </div>
                 </div>
             </div>
         </div>
     </footer>    <!-- Backend Bundle JavaScript -->
+
+
+
+
+
+
+
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chiqish so'rovi</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Ro'stdan ham ushbu Chiqaszmi</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Yo'q</button>
+                <a class="btn btn-primary" href="{% url 'log-out' %}">Ha</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="{% static 'assets/js/backend-bundle.min.js' %}"></script>
     <!-- Chart Custom JavaScript -->
     <script src="{% static 'assets/js/customizer.js' %}"></script>

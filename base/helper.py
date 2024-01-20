@@ -38,7 +38,7 @@ def prev_month(request):
             current_date += timedelta(days=1)
 
 
-def from_date(request, year, month, day):
+def from_date(request, year, month, day=1):
     # Get today's date
     today = timezone.now().date()
 
