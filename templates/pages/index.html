@@ -16,10 +16,23 @@ Tashkent, Uzbekistan
      </div>
   </div>
   <div class="card-body">
+          <div class="alert alert-danger" id="show_alert" role="alert" {{ show_alert }}>
 
+             <div class="text-center">
+                <h5 class="alert-heading">DIQQAT!</h5>
+                <p>
+                    {{ alert.goto }}
+                </p>
+                <hr>
+                <p class="mb-0">
+                    {{ alert.qada }}
+                </p><br>
+            <button class="hide_alert btn btn-primary justify-content-end">Tushunarli</button>
+
+             </div>
+
+          </div>
           <nav aria-label="...">
-
-
             <form action="{% url 'goto' %}">
                 <ul class="pagination pagination-lg">
                     <li class="page-item">
@@ -51,9 +64,6 @@ Tashkent, Uzbekistan
             </form>
 
         </nav>
-
-
-
 
 
       <div class="card-header d-flex justify-content-between">

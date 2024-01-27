@@ -5,7 +5,7 @@
 #  Tashkent, Uzbekistan
 from django.urls import path
 
-from core.auth import sign_in, sign_out
+from core.auth import sign_in, sign_out, hide_alert
 from core.views import index, grader, report, goto
 
 urlpatterns = [
@@ -20,4 +20,5 @@ urlpatterns = [
     # auth
     path("login/", sign_in, name='login'),
     path('logout/', sign_out, name='log-out'),
+    path('hide_alert/', hide_alert, name='hide_alert'),
 ]

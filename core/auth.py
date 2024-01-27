@@ -9,7 +9,7 @@ from contextlib import closing
 
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, HttpResponse
 
 from core.models import User
 
@@ -30,8 +30,17 @@ def sign_in(requests):
         if not user.is_active:
             return render(requests, 'pages/auth/login.html', {"error": "Profil active emas "})
         login(requests, user)
+        requests.session['show_alert'] = ' '
         return redirect('home')
     return render(requests, 'pages/auth/login.html')
+
+
+def hide_alert(request):
+    try:
+        del request.session['show_alert']
+    except:
+        pass
+    return HttpResponse('ok')
 
 
 @login_required(login_url='login')

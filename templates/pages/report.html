@@ -37,13 +37,27 @@ Tashkent, Uzbekistan
               </li>
               <li class="page-item">
                   <a class="page-link" href="{% url 'report' year=now_year month=now_month %}">
-                      <span class="text-danger">Bugun</span>: {{ next|date:"Y  F" }}
+                      <span class="text-danger">Bugun</span>: {{ today|date:"Y  F" }}
                   </a>
               </li>
                 {% endif %}
            </ul>
 
+            <div class="alert alert-danger" id="show_alert"  role="alert" {{ show_alert }}>
+             <div class="text-center">
+                <h5 class="alert-heading">DIQQAT!</h5>
+                <p>
+                    {{ alert.goto }}
+                </p>
+                <hr>
+                <p class="mb-0">
+                    {{ alert.qada }}
+                </p><br>
+                 <button class="hide_alert btn btn-primary justify-content-end">Tushunarli</button>
 
+
+             </div>
+          </div>
             <form action="{% url 'goto' %}">
                 <ul class="pagination pagination-lg">
                     <li class="page-item">

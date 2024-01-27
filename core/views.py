@@ -27,7 +27,7 @@ def index(request):
         "to_now": queryset1,
 
     }
-
+    request.session['last_path'] = request.path
     return render(request, 'pages/index.html', ctx)
 
 
@@ -54,13 +54,14 @@ def grader(request, pk, status, type):
 def goto(request):
     last_path = request.session.get('last_path', '/')
     year = int(request.GET.get('year', 0))
-    month = int(request.GET.get('month', 1))
-    if year < 1850:
+    month = int(request.GET.get('months', 1))
+    if year < 1900:
         return redirect(last_path)
 
     return redirect('report', year=year, month=month)
 
 
+@login_required(login_url='login')
 def report(request, year, month):
     last_path = request.session.get('last_path', '/')
     start_date = date(year, month, 1)
@@ -69,10 +70,8 @@ def report(request, year, month):
     # Get today's date
     now = datetime.now()
     today = now.date()
-
-    if start_date > today or year < 1850:
+    if start_date > today or year < 1900:
         return redirect(last_path)
-
     # Get the previous month
     prev_month = start_date - relativedelta(months=1)
 
@@ -81,7 +80,6 @@ def report(request, year, month):
         queryset1 = Qada.objects.filter(user=request.user,
                                         date__range=(first_day_of_month, today)).order_by('-date')
         next_month = None
-
 
     else:
         if start_date.month == 12:
@@ -106,6 +104,7 @@ def report(request, year, month):
         "prev": prev_month,
         "prev_month": int(prev_month.strftime('%m')),
 
+        'today': today,
         "now_year": int(today.strftime('%Y')),
         "now_month": int(today.strftime('%m')),
 
