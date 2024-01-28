@@ -26,7 +26,7 @@ def index(request):
     sql = f"""
         SELECT date, bomdod, peshin, asr, shom , xufton , vitr 
         from core_qada 
-        where user_id = 1
+        where user_id = {request.user.id}
         and  "date" BETWEEN "{start}" and "{end}" 
         and (bomdod == 'bg-danger' or peshin == 'bg-danger' or asr == 'bg-danger' or shom == 'bg-danger' or xufton == 'bg-danger' or vitr == 'bg-danger')
         """
@@ -172,7 +172,7 @@ def qada_events(request):
     sql = f"""
     SELECT date, bomdod, peshin, asr, shom , xufton , vitr 
     from core_qada 
-    where user_id = 1
+    where user_id = {request.user.id}
     and  "date" BETWEEN "{start}" and "{end}" 
     and (bomdod == 'bg-danger' or peshin == 'bg-danger' or asr == 'bg-danger' or shom == 'bg-danger' or xufton == 'bg-danger' or vitr == 'bg-danger')
     """
