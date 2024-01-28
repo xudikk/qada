@@ -3,10 +3,10 @@ from datetime import datetime, timedelta, date
 
 from django.contrib.auth.decorators import login_required
 from django.db import connection
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
-from base.helper import from_date
+from base.helper import from_date, formatter
 from core.models import Qada
 # Create your views here.
 from dateutil.relativedelta import relativedelta
@@ -19,12 +19,28 @@ def index(request):
 
     today = datetime.now().date()
     first_day_of_month = today.replace(day=1)
+    start = first_day_of_month.strftime('%Y-%m-%d')
+    end = today.strftime('%Y-%m-%d')
+
     # Get the QuerySet from the first day of the month until today
-    queryset1 = Qada.objects.filter(user=request.user, date__range=(first_day_of_month, today)).order_by('-date')
+    sql = f"""
+        SELECT date, bomdod, peshin, asr, shom , xufton , vitr 
+        from core_qada 
+        where user_id = 1
+        and  "date" BETWEEN "{start}" and "{end}" 
+        and (bomdod == 'bg-danger' or peshin == 'bg-danger' or asr == 'bg-danger' or shom == 'bg-danger' or xufton == 'bg-danger' or vitr == 'bg-danger')
+        """
+    with closing(connection.cursor()) as cursor:
+        cursor.execute(sql)
+        result = formatter(cursor.fetchall())
 
     ctx = {
         "today": todays,
-        "to_now": queryset1,
+
+        'date_today': today,
+        "now_year": int(today.strftime('%Y')),
+        "now_month": int(today.strftime('%m')),
+        "events": result
 
     }
     request.session['last_path'] = request.path
@@ -70,7 +86,7 @@ def report(request, year, month):
     # Get today's date
     now = datetime.now()
     today = now.date()
-    if start_date > today or year < 1900:
+    if start_date > today or year < 1950:
         return redirect(last_path)
     # Get the previous month
     prev_month = start_date - relativedelta(months=1)
@@ -119,3 +135,51 @@ def report(request, year, month):
 
     request.session['last_path'] = request.path
     return render(request, 'pages/report.html', ctx)
+
+
+@login_required(login_url='login')
+def qada_events(request):
+    last_path = request.session.get('last_path', '/')
+
+    year = int(request.GET.get('year', 1900))
+    month = int(request.GET.get('month', 1))
+
+    start_date = date(year, month, 1)
+    now = datetime.now()
+    today = now.date()
+
+    if start_date > today or year < 1950:
+        return JsonResponse({"events": []})
+
+    if (start_date.year == today.year) and (start_date.month == today.month):
+        last_day_of_month = today
+
+    else:
+        if start_date.month == 12:
+            last_day_of_month = start_date.replace(year=start_date.year + 1, month=1, day=1) - timedelta(days=1)
+        else:
+            last_day_of_month = start_date.replace(month=start_date.month + 1, day=1) - timedelta(days=1)
+
+    start = start_date.strftime('%Y-%m-%d')
+    end = last_day_of_month.strftime('%Y-%m-%d')
+
+    # start_date = date(year, month, 1)
+    # if start_date.month == 12:
+    #     last_day_of_month = start_date.replace(year=start_date.year + 1, month=1, day=1) - timedelta(days=1)
+    # else:
+    #     last_day_of_month = start_date.replace(month=start_date.month + 1, day=1) - timedelta(days=1)
+
+    sql = f"""
+    SELECT date, bomdod, peshin, asr, shom , xufton , vitr 
+    from core_qada 
+    where user_id = 1
+    and  "date" BETWEEN "{start}" and "{end}" 
+    and (bomdod == 'bg-danger' or peshin == 'bg-danger' or asr == 'bg-danger' or shom == 'bg-danger' or xufton == 'bg-danger' or vitr == 'bg-danger')
+    """
+    with closing(connection.cursor()) as cursor:
+        cursor.execute(sql)
+        result = formatter(cursor.fetchall())
+
+    print(result)
+
+    return JsonResponse({"events": result})

@@ -26,3 +26,41 @@ def from_date(request, year, month, day=1):
         # Go to the next date
         current_date += timedelta(days=1)
 
+
+def formatter(lists: list):
+    response = []
+    # (datetime.date(2024, 1, 16), 'bg-danger', 'bg-success', 'bg-success', 'bg-success', 'bg-success', 'bg-success')
+    for x in lists:
+        if x[1] == 'bg-danger':
+            response.append({
+                "title": 'Bomdod',
+                "start": x[0].strftime('%Y-%m-%d'),
+            })
+        if x[2] == 'bg-danger':
+            response.append({
+                "title": 'Peshin',
+                "start": x[0].strftime('%Y-%m-%d'),
+            })
+        if x[3] == 'bg-danger':
+            response.append({
+                "title": 'Asr',
+                "start": x[0].strftime('%Y-%m-%d'),
+            })
+        if x[4] == 'bg-danger':
+            response.append({
+                "title": 'Shom',
+                "start": x[0].strftime('%Y-%m-%d'),
+            })
+        if x[5] == 'bg-danger':
+            response.append({
+                "title": 'Xufton',
+                "start": x[0].strftime('%Y-%m-%d'),
+            })
+        if x[6] == 'bg-danger':
+            response.append({
+                "title": 'Vitr',
+                "start": x[0].strftime('%Y-%m-%d'),
+            })
+    return response
+
+

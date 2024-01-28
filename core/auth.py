@@ -7,7 +7,7 @@ import datetime
 import random
 from contextlib import closing
 
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, HttpResponse
 
@@ -20,19 +20,41 @@ def sign_in(requests):
 
     if requests.POST:
         data = requests.POST
-        user = User.objects.filter(phone=data['phone']).first()
+        user = User.objects.filter(username=data['username']).first()
         if not user:
-            return render(requests, 'pages/auth/login.html', {"error": "Phone xato"})
+            return render(requests, 'pages/auth/login.html', {"error": "username xato"})
 
         if not user.check_password(data['pass']):
-            return render(requests, 'pages/auth/login.html', {"error": "Parol xato"})
+            return render(requests, 'pages/auth/login2.html', {"error": "Parol xato"})
 
         if not user.is_active:
-            return render(requests, 'pages/auth/login.html', {"error": "Profil active emas "})
+            return render(requests, 'pages/auth/login2.html', {"error": "Profil active emas "})
         login(requests, user)
         requests.session['show_alert'] = ' '
         return redirect('home')
-    return render(requests, 'pages/auth/login.html')
+    return render(requests, 'pages/auth/login2.html')
+
+
+def sign_up(requests):
+    if not requests.user.is_anonymous:
+        return redirect("home")
+
+    if requests.POST:
+        data = requests.POST
+        user = User.objects.filter(username=data['username']).first()
+        if user:
+            return render(requests, 'pages/auth/regis2.html', {"error": "Bunday foydalanuvchi mavjud"})
+
+        if data['pass'] != data['re-pass']:
+            return render(requests, 'pages/auth/regis2.html', {"error": "Parollar mos kelmadi"})
+
+        user = User.objects.create_user(data['username'], data['pass'])
+
+        login(requests, user)
+        authenticate(requests)
+        requests.session['show_alert'] = ' '
+        return redirect('home')
+    return render(requests, 'pages/auth/regis2.html')
 
 
 def hide_alert(request):
