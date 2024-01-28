@@ -56,12 +56,6 @@ Tashkent, Uzbekistan -->
                             </button>
 
                         </li>
-
-                        <li class="page-item">
-                            <a class="page-link" href="{% url 'report' year=now_year month=now_month %}">
-                                <span class="text-danger">Bugun</span>: {{ date_today|date:"Y F" }}
-                            </a>
-                        </li>
                     </ul>
                 </form>
 
@@ -70,9 +64,13 @@ Tashkent, Uzbekistan -->
     </div>
 
     <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <div class="header-title ">
-                    <h4 class="card-title">Bugungi kun</h4>
+            <div class="card-header ">
+                <div class="header-title d-flex justify-content-center">
+                    <h4 class="card-title">
+                        <a class="" href="{% url 'report' year=now_year month=now_month %}">
+                           Bugun: {{ date_today|date:"Y F" }}
+                        </a>
+                    </h4>
                 </div>
             </div>
             <div class="table-responsive">
