@@ -1,3 +1,4 @@
+import json
 from contextlib import closing
 from datetime import datetime, timedelta, date
 
@@ -34,13 +35,12 @@ def index(request):
         cursor.execute(sql)
         result = formatter(cursor.fetchall())
 
+    events_json = json.dumps(result)
     ctx = {
         "today": todays,
 
         'date_today': today,
-        "now_year": int(today.strftime('%Y')),
-        "now_month": int(today.strftime('%m')),
-        "events": result
+        "events": events_json
 
     }
     request.session['last_path'] = request.path
@@ -71,7 +71,7 @@ def goto(request):
     last_path = request.session.get('last_path', '/')
     year = int(request.GET.get('year', 0))
     month = int(request.GET.get('months', 1))
-    if year < 1900:
+    if year < 1950:
         return redirect(last_path)
 
     return redirect('report', year=year, month=month)
@@ -121,11 +121,6 @@ def report(request, year, month):
         "prev_month": int(prev_month.strftime('%m')),
 
         'today': today,
-        "now_year": int(today.strftime('%Y')),
-        "now_month": int(today.strftime('%m')),
-
-
-
     }
     if next_month:
         ctx.update({
@@ -139,7 +134,6 @@ def report(request, year, month):
 
 @login_required(login_url='login')
 def qada_events(request):
-    last_path = request.session.get('last_path', '/')
 
     year = int(request.GET.get('year', 1900))
     month = int(request.GET.get('month', 1))
@@ -163,12 +157,6 @@ def qada_events(request):
     start = start_date.strftime('%Y-%m-%d')
     end = last_day_of_month.strftime('%Y-%m-%d')
 
-    # start_date = date(year, month, 1)
-    # if start_date.month == 12:
-    #     last_day_of_month = start_date.replace(year=start_date.year + 1, month=1, day=1) - timedelta(days=1)
-    # else:
-    #     last_day_of_month = start_date.replace(month=start_date.month + 1, day=1) - timedelta(days=1)
-
     sql = f"""
     SELECT date, bomdod, peshin, asr, shom , xufton , vitr 
     from core_qada 
@@ -179,7 +167,5 @@ def qada_events(request):
     with closing(connection.cursor()) as cursor:
         cursor.execute(sql)
         result = formatter(cursor.fetchall())
-
-    print(result)
 
     return JsonResponse({"events": result})

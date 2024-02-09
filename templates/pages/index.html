@@ -12,17 +12,13 @@ Tashkent, Uzbekistan -->
             </div>
         </div>
         <div class="card-body">
-            <div class="alert alert-danger" id="show_alert" role="alert" {{ show_alert }}>
+            <div class="alert alert-danger  justify-content-center" id="show_alert" role="alert" {{ show_alert }}>
 
                 <div class="text-center">
                     <h5 class="alert-heading">DIQQAT!</h5>
                     <p>
                         {{ alert.goto }}
                     </p>
-                    <hr>
-                    <p class="mb-0">
-                        {{ alert.qada }}
-                    </p><br>
                     <button class="hide_alert btn btn-primary justify-content-end">Tushunarli</button>
 
                 </div>
@@ -168,7 +164,7 @@ Tashkent, Uzbekistan -->
 
 
     <div class="card">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-center">
             <div class="header-title">
                 <h4 class="card-title">Kalendar bo'yicha (O'qilmay qolgan nomozlar)</h4>
             </div>
@@ -232,26 +228,19 @@ Tashkent, Uzbekistan -->
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['dayGrid'],
-                height: 'parent',
+                plugins: ['dayGrid', 'timeGrid'],
+                height: 'auto',
                 header: {
                     left: 'prevYear prev today next nextYear',
                     center: 'title',
-                    right: 'dayGridMonth'
+                    right: 'dayGridMonth timeGridDay'
                   },
                 defaultView: 'dayGridMonth',
                 defaultDate: '{{ date_today|date:"Y-m-01" }}',
                 navLinks: true, // can click day/week names to navigate views
                 editable: false,
                 eventLimit: false, // allow "more" link when too many events
-                events: [
-                    {% for i in events %}
-                        {
-                            title: "{{ i.title }}",
-                            start: '{{ i.start }}',
-                        },
-                    {% endfor %}
-                ], // start with default event array
+                events: {{ events|safe }}, // start with default event array
 
             });
             calendar.render();
@@ -284,7 +273,7 @@ Tashkent, Uzbekistan -->
 
              });
             button_prev_year.addEventListener('click', function() {
-                   var dateStr = calendar.getDate();
+                var dateStr = calendar.getDate();
                 var date = new Date(dateStr);
                 var year = date.getFullYear();
                 var month = date.getMonth() + 1;

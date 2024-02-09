@@ -14,6 +14,12 @@ from core.models import Qada  # Qazo Nomozlari Models
 
 
 def main(request):
+    result = {
+        "app_name": settings.APP_NAME,
+        'show_alert': request.session.get('show_alert', 'hidden'),
+
+    }
+    result.update({"alert": ALERTS})
     if not request.user.is_anonymous:
         # Get today's date
         today = timezone.now().date()
@@ -39,11 +45,11 @@ def main(request):
             # Go to the next date
             current_date += timedelta(days=1)
 
-    result = {
-        "app_name": settings.APP_NAME,
-        'show_alert': request.session.get('show_alert', 'hidden')
-    }
-    result.update({"alert": ALERTS})
+        result.update({
+            "now_year": int(today.strftime('%Y')),
+            "now_month": int(today.strftime('%m')),
+        })
+
     return result
 
 

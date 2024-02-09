@@ -70,15 +70,15 @@ Tashkent, Uzbekistan
                       <li class="px-3 pt-3 pb-2">
                           <span class="text-uppercase small font-weight-bold">Pages</span>
                       </li>
-<!--                      <li class="sidebar-layout">-->
-<!--                          <a href="" class="svg-icon">-->
-<!--                              <i class="">-->
-<!--                                  <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />-->
-<!--                                  </svg>-->
-<!--                              </i><span class="ml-2">Qoidalar</span>-->
-<!--                          </a>-->
-<!--                      </li>-->
+                      <li class="sidebar-layout">
+                          <a href="{% url 'report' year=now_year month=now_month %}" class="svg-icon">
+                              <i class="">
+                                  <svg width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                  </svg>
+                              </i><span class="ml-2">Hisobot</span>
+                          </a>
+                      </li>
                       <li class="sidebar-layout">
                           <a href="" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
                               <i>
@@ -348,9 +348,9 @@ Tashkent, Uzbekistan
 
     <!--    // calendar  -->
 
-    <script src="{% static 'calendar/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'calendar/js/popper.min.js' %}"></script>
-    <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
+<!--    <script src="{% static 'calendar/js/jquery-3.3.1.min.js' %}"></script>-->
+<!--    <script src="{% static 'calendar/js/popper.min.js' %}"></script>-->
+<!--    <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>-->
 
     <script src="{% static 'calendar/fullcalendar/packages/core/main.js' %}"></script>
     <script src="{% static 'calendar/fullcalendar/packages/interaction/main.js' %}"></script>
