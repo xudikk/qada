@@ -49,7 +49,18 @@ def main(request):
             "now_year": int(today.strftime('%Y')),
             "now_month": int(today.strftime('%m')),
         })
-
     return result
+
+
+def page_activations(request):
+    path = request.path
+    path = path.strip('/').split("/")[0]
+
+    active = {
+        "r": "r_active",
+        "": "home",
+    }.get(path, ' ')
+    return {active: 'active'}
+
 
 

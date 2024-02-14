@@ -56,7 +56,7 @@ Tashkent, Uzbekistan
           <div class="data-scrollbar" data-scroll="1">
               <nav class="iq-sidebar-menu">
                   <ul id="iq-sidebar-toggle" class="side-menu">
-                      <li class="active sidebar-layout">
+                      <li class="sidebar-layout {{ home_active }}">
                           <a href="{% url 'home' %}" class="svg-icon">
                               <i class="">
                                   <svg width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,13 +64,13 @@ Tashkent, Uzbekistan
                                   </svg>
                               </i>
                               <span class="ml-2">Asosiy Sahifa</span>
-                              <p class="mb-0 w-10 badge badge-pill badge-primary">6</p>
+<!--                              <p class="mb-0 w-10 badge badge-pill badge-primary">6</p>-->
                           </a>
                       </li>
                       <li class="px-3 pt-3 pb-2">
                           <span class="text-uppercase small font-weight-bold">Pages</span>
                       </li>
-                      <li class="sidebar-layout">
+                      <li class="sidebar-layout {{ r_active }}  ">
                           <a href="{% url 'report' year=now_year month=now_month %}" class="svg-icon">
                               <i class="">
                                   <svg width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -79,7 +79,7 @@ Tashkent, Uzbekistan
                               </i><span class="ml-2">Hisobot</span>
                           </a>
                       </li>
-                      <li class="sidebar-layout">
+                      <li class="sidebar-layout ">
                           <a href="" class="collapsed svg-icon" data-toggle="collapse" aria-expanded="false">
                               <i>
                                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">

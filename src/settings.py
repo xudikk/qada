@@ -60,6 +60,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'src.cp.main',
+                'src.cp.page_activations',
 
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
