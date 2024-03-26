@@ -8,15 +8,23 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
 from base.helper import from_date, formatter
-from core.models import Qada
+from core.models import Qada, User
 # Create your views here.
 from dateutil.relativedelta import relativedelta
 
 
 @login_required(login_url='login')
 def index(request):
+    from datetime import datetime, timedelta
+
+    # Get current date
     current_date = datetime.now().date()
-    todays = Qada.objects.get_or_create(user=request.user, date=current_date)[0]
+
+    # Get the dates for the last 3 days
+    last_three_days = [current_date - timedelta(days=i) for i in range(0, 5)]
+
+    # Get or create Qada objects for the last 3 days
+    qadas = [Qada.objects.get_or_create(user=request.user, date=date)[0] for date in last_three_days]
 
     today = datetime.now().date()
     first_day_of_month = today.replace(day=1)
@@ -36,8 +44,10 @@ def index(request):
         result = formatter(cursor.fetchall())
 
     events_json = json.dumps(result)
+    print(">>>>>>>>>>>>>", qadas)
     ctx = {
-        "today": todays,
+        # "today": todays,
+        "qadas": qadas,
 
         'date_today': today,
         "events": events_json
@@ -134,7 +144,6 @@ def report(request, year, month):
 
 @login_required(login_url='login')
 def qada_events(request):
-
     year = int(request.GET.get('year', 1900))
     month = int(request.GET.get('month', 1))
 
@@ -169,3 +178,18 @@ def qada_events(request):
         result = formatter(cursor.fetchall())
 
     return JsonResponse({"events": result})
+
+
+@login_required(login_url='login')
+def profile(request):
+    if request.method == 'POST':
+        data = request.POST
+        user = User.objects.filter(id=request.user.id).first()
+        user.username = data['username']
+        user.first_name = data['first_name']
+        user.last_name = data['last_name']
+        user.email = data['email']
+        user.save()
+        return redirect('user_profile')
+
+    return render(request, 'pages/profile.html')

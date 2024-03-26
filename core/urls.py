@@ -6,7 +6,7 @@
 from django.urls import path
 
 from core.auth import sign_in, sign_out, hide_alert, sign_up
-from core.views import index, grader, report, goto, qada_events
+from core.views import index, grader, report, goto, qada_events, profile
 
 urlpatterns = [
     path('', index, name='home'),
@@ -23,4 +23,7 @@ urlpatterns = [
     path('logout/', sign_out, name='log-out'),
     path('regis/', sign_up, name='regis'),
     path('hide_alert/', hide_alert, name='hide_alert'),
+
+
+    path('profile/', profile, name='profile'),
 ]

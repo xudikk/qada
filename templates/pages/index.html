@@ -83,7 +83,7 @@ Tashkent, Uzbekistan -->
                         </tr>
                     </thead>
                     <tbody>
-
+                        {% for today in qadas %}
                         <tr>
                             <td><b>{{ today.date|date:"d-M-Y l" }}</b></td>
                             <td class={{ today.bomdod }}> <!-- Bomdod  -->
@@ -154,6 +154,7 @@ Tashkent, Uzbekistan -->
                             </td>
 
                         </tr>
+                        {% endfor %}
                     </tbody>
 
                 </table>
